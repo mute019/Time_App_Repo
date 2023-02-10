@@ -1,9 +1,13 @@
-#!bin/bash
+#!/bin/bash
 
-#this is setting library path in the LD_LIBRARY_PATH variable 
-LD_LIBRARY_PATH=/home/ee212778/Documents/Client-Server/Application_EXEC/libs:$LD_LIBRARY_PATH
+#unsetting the LD_LIBRARY_PATH environment variable!
+unset LD_LIBRARY_PATH
 
-#here we are exporting the path before executing the timeshare application
+#setting the LD_LIBRARY_PATH environment variable!
+LD_LIBRARY_PATH=/home/ee212778/Documents/Time_App_repo/Daemon/libs:$LD_LIBRARY_PATH
+
+#Exposing LD_LIBRARY_PATH
 export LD_LIBRARY_PATH
 
-
+#now invoking the executable 
+/home/ee212778/Documents/Time_App_repo/Daemon/timeshare

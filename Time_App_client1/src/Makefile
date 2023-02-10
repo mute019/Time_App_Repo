@@ -1,14 +1,12 @@
 CC=gcc
-INCLUDEDIR=. ./includes
-LIBSDIR= . 
-BINARY=timeshare
-
-LIBNAME=lservr
+INCLUDEDIR=. .. ../includes
+LIBSDIR= . .. ../libs
+BINARY=../build/client
 
 OPT=-O0
 DEPFLAGS=-MP -MD
 
-CFLAGS=-Wall -Wextra -g $(foreach DEP,$(INCLUDEDIR), -I$(DEP)) $(OPT) $(DEPFLAGS) -$(LIBNAME) -L libs
+CFLAGS=-Wall -Wextra -g $(foreach DEP,$(INCLUDEDIR), -I$(DEP)) $(OPT) $(DEPFLAGS)
 
 SOURCECODE=$(foreach SRC, $(LIBSDIR), $(wildcard $(SRC)/*.c))
 
@@ -18,10 +16,10 @@ DEPENDENCIES=$(patsubst %.c, %.d, $(SOURCECODE))
 all: $(BINARY)
 
 $(BINARY): $(OBJFILE)
-	$(CC) -pthread -o $@ $^ $(CFLAGS)
+	$(CC) -o $@ $^
 
 %.o: %.c
-	$(CC) -c -o $@ $<
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
 	rm -rf $(OBJFILE) $(DEPENDENCIES)
